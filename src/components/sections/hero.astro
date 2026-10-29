@@ -1,11 +1,11 @@
 ---
 import SectionContainer from "@components/section-container.astro";
 
-const WHATSAPP_NUMBER = "522741151616";
-const whatsappMessage = encodeURIComponent(
+import { whatsappLink } from "@/constants/contact";
+
+const whatsappUrl = whatsappLink(
   "Hola Jonathan, vi tu tarjeta y quiero cotizar una página web.",
 );
-const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
 const services = ["Landing pages", "Blogs", "Sitios informativos"];
 
