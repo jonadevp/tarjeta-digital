@@ -77,9 +77,11 @@ const ogImage = new URL(image, siteUrl).toString();
       })();
     </script>
   </head>
-  <body class="antialiased overflow-x-hidden transition-colors duration-300">
+  <body class="antialiased overflow-x-hidden transition-colors duration-300 flex flex-col min-h-dvh">
     <Header />
-    <slot />
+    <main class="flex-1">
+      <slot />
+    </main>
    <Footer />
   </body>
 </html>
