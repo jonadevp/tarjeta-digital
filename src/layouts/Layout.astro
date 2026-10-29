@@ -1,23 +1,85 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import { Font } from "astro:assets";
+import "../styles/global.css";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+import Header from "@components/header.astro";
+import Footer from "@components/footer.astro";
+
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  canonical?: string;
+}
+
+const siteUrl = Astro.site ?? new URL("https://jonadevp.com");
+
+const {
+  description,
+  title,
+  image = "/tarjeta.webp",
+  imageAlt = "Tarjeta de presentación",
+  canonical = new URL(Astro.url.pathname, siteUrl).toString(),
+} = Astro.props;
+
+const ogImage = new URL(image, siteUrl).toString();
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Jonathan Sánchez Rodríguez" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="634" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="jonadevp · Tarjeta" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <title>{title}</title>
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-space-grotesk" preload />
+
+    <script is:inline>
+      (function () {
+        let theme = "system";
+        try {
+          theme = localStorage.getItem("theme") || "system";
+        } catch (e) {}
+        const isDark =
+          theme === "dark" ||
+          (theme === "system" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body class="antialiased overflow-x-hidden transition-colors duration-300">
+    <Header />
+    <slot />
+   <Footer />
+  </body>
+</html>
