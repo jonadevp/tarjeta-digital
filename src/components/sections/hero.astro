@@ -1,4 +1,6 @@
 ---
+import SectionContainer from "@components/section-container.astro";
+
 const WHATSAPP_NUMBER = "522741151616";
 const whatsappMessage = encodeURIComponent(
   "Hola Jonathan, vi tu tarjeta y quiero cotizar una página web.",
@@ -13,13 +15,10 @@ const highlights = [
   { value: "1:1", label: "Trato directo" },
 ];
 ---
-
-<section
-  id="inicio"
-  class="relative isolate overflow-hidden px-4 pt-16 pb-20 sm:px-6 sm:pt-24 sm:pb-28 lg:px-8"
->
-  <!-- Fondo: cuadrícula + destellos de color -->
+<SectionContainer class="relative isolate overflow-hidden pt-16 sm:pt-20"> 
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <!-- Fondo: cuadrícula + destellos de color -->
+
     <div
       class="absolute inset-0 bg-[linear-gradient(to_right,rgb(148_163_184/0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgb(148_163_184/0.12)_1px,transparent_1px)] bg-size-[40px_40px] mask-[radial-gradient(ellipse_at_top,black_30%,transparent_75%)]"
     >
@@ -34,7 +33,7 @@ const highlights = [
     </div>
   </div>
 
-  <div class="mx-auto grid max-w-4xl items-center gap-14 md:grid-cols-[1.1fr_1fr] md:gap-10">
+  <div class="mx-auto grid max-w-5xl items-center gap-14 md:grid-cols-[1.1fr_1fr] md:gap-10">
     <!-- Texto -->
     <div class="text-center md:text-left text-pretty">
       <p
@@ -200,7 +199,7 @@ const highlights = [
       </div>
     </div>
   </div>
-</section>
+</SectionContainer>
 
 <style>
   .hero-reveal {
