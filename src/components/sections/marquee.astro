@@ -1,0 +1,62 @@
+---
+import SectionContainer from "@components/section-container.astro";
+
+const items = [
+    "Landing page",
+    "Portafolios",
+    "Blogs",
+    "Sitios web informativos",
+    "Demo en vivo sin costo",
+    "1 mes de mantenimiento incluido"
+]
+
+const copies = [0, 1,2,3]
+---
+
+<div class="bg-slate-900">
+    <div class="overflow-hidden py-6 mx-auto mask-[linear-gradient(to_right,transparent_0,#ffffff_128px,#ffffff_calc(100%-128px),transparent_100%)]">
+        <div class="marquee-track flex w-max">
+            {
+                copies.map((copy) => (
+                  <ul
+                    class="flex shrink-0 items-center gap-8 pr-8"
+                    aria-hidden={copy > 0 ? "true" : undefined}
+                  >
+                    {items.map((item) => (
+                      <li class="flex items-center gap-8 text-sm font-medium whitespace-nowrap text-white">
+                        {item}
+                        <span aria-hidden="true" class="size-1 rounded-full bg-indigo-500" />
+                      </li>
+                    ))}
+                  </ul>
+                ))
+              }
+
+        </div>
+    </div>
+</div>
+
+<style>
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-25%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+</style>
