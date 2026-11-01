@@ -1,0 +1,42 @@
+<button
+  type="button"
+  id="btn-to-top"
+  data-visible="false"
+  aria-label="Volver arriba"
+  transition:persist
+  class="fixed right-8 bottom-8 z-40 grid size-11 cursor-pointer place-items-center rounded-full bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 invisible opacity-0 transition-[opacity,visibility,translate,background-color] duration-200 hover:-translate-y-0.5 hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 data-[visible=true]:visible data-[visible=true]:opacity-100 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    class="size-4"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"></path>
+  </svg>
+</button>
+
+<script >
+  // Píxeles que hay que bajar antes de mostrar el botón
+  const SHOW_AFTER = 400;
+  const id = Math.random().toString(36).slice(2, 6)
+  const btn = document.getElementById("btn-to-top");
+
+  if (btn instanceof HTMLButtonElement) {
+    const update = () => {
+      btn.dataset.visible = String(window.scrollY > SHOW_AFTER);
+      console.log("se hizo scroll: " + id)
+    };
+
+    window.addEventListener("scroll", update, { passive: true });
+
+    // El scroll suave lo da el scroll-behavior de tu global.css,
+    // que además se apaga con "reducir movimiento"
+    btn.addEventListener("click", () => window.scrollTo({ top: 0 }));
+
+    update();
+  }
+</script>
