@@ -1,20 +1,27 @@
 ---
-const THEMES = ["Light", "Dark", "System"];
 import Sun from "@icons/sun.astro";
 import System from "@icons/system.astro";
 import Moon from "@icons/moon.astro";
+
+const THEMES = [
+  { value: "light", label: "Claro" },
+  { value: "dark", label: "Oscuro" },
+  { value: "system", label: "Sistema" },
+];
 ---
 
 <>
   <button
     type="button"
     id="theme-toggle-btn"
-    class="appearance-none border-none flex hover:scale-125 transition text-slate-700 dark:text-white/90"
+    aria-expanded="false"
+    aria-controls="themes-menu"
+    class="appearance-none border-none flex hover:scale-125 transition motion-reduce:transition-none motion-reduce:hover:scale-100 text-slate-700 dark:text-white/90"
   >
-    <span class="sr-only">Elige un tema</span>
-    <Sun id="light" class="theme-icon size-6" />
-    <System id="system" class="theme-icon absolute size-6" />
-    <Moon id="dark" class="theme-icon absolute size-6" />
+    <span id="theme-toggle-label" class="sr-only">Elige un tema</span>
+    <Sun id="theme-icon-light" class="theme-icon size-6" aria-hidden="true" />
+    <System id="theme-icon-system" class="theme-icon absolute size-6" aria-hidden="true" />
+    <Moon id="theme-icon-dark" class="theme-icon absolute size-6" aria-hidden="true" />
   </button>
 
   <div
@@ -23,14 +30,15 @@ import Moon from "@icons/moon.astro";
   >
     <ul>
       {
-        THEMES.map((theme) => (
+        THEMES.map(({ value, label }) => (
           <li>
             <button
               type="button"
-              data-theme={theme.toLowerCase()}
-              class="themes-menu-option w-full text-left cursor-pointer z-50 px-2 py-1.5 hover:bg-slate-400/40 dark:hover:bg-gray-500/50 rounded-sm"
+              data-theme={value}
+              aria-pressed="false"
+              class="themes-menu-option w-full text-left cursor-pointer px-2 py-1.5 hover:bg-slate-400/40 dark:hover:bg-gray-500/50 rounded-sm"
             >
-              {theme}
+              {label}
             </button>
           </li>
         ))
@@ -44,9 +52,9 @@ import Moon from "@icons/moon.astro";
     scale: 0;
   }
 
-  :global(html[data-theme="light"]) #light,
-  :global(html[data-theme="dark"]) #dark,
-  :global(html[data-theme="system"]) #system {
+  :global(html[data-theme="light"]) #theme-icon-light,
+  :global(html[data-theme="dark"]) #theme-icon-dark,
+  :global(html[data-theme="system"]) #theme-icon-system {
     scale: 1;
   }
 
@@ -66,78 +74,97 @@ import Moon from "@icons/moon.astro";
       opacity: 1;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    #themes-menu.open {
+      animation: none;
+    }
+  }
 </style>
 
 <script>
   type ThemePreference = "dark" | "light" | "system";
 
-  const DARK: ThemePreference = "dark";
-  const SYSTEM: ThemePreference = "system";
   const THEME_STORAGE_KEY = "theme";
+  const LABELS = { light: "claro", dark: "oscuro", system: "del sistema" } as const;
 
-  let remove: (() => void) | null = null;
-  // detecta la preferencia de colores del sistema operativo
-  const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
-  const themesMenu = document.getElementById("themes-menu") as HTMLDivElement;
-  const toggleBtn = document.getElementById("theme-toggle-btn");
+  const isThemePreference = (value: unknown): value is ThemePreference =>
+    value === "light" || value === "dark" || value === "system";
 
-  const getThemePreference = (): ThemePreference => {
-    try {
-      return (
-        (localStorage.getItem(THEME_STORAGE_KEY) as ThemePreference) ?? SYSTEM
-      );
-    } catch {
-      return SYSTEM;
-    }
-  };
+  function initThemeToggle() {
+    const themesMenu = document.getElementById("themes-menu");
+    const toggleBtn = document.getElementById("theme-toggle-btn");
+    const toggleLabel = document.getElementById("theme-toggle-label");
+    const options = document.querySelectorAll<HTMLButtonElement>(".themes-menu-option");
+    if (!themesMenu || !toggleBtn || !toggleLabel) return;
 
-  const updateIcon = (themePreference: ThemePreference): void => {
-    document.documentElement.dataset.theme = themePreference;
-  };
+    // Detecta la preferencia de colores del sistema operativo
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-  const updateTheme = (): void => {
-    if (remove != null) {
-      remove();
-    }
-
-    matchMedia.addEventListener("change", updateTheme);
-    remove = () => {
-      matchMedia.removeEventListener("change", updateTheme);
+    const getThemePreference = (): ThemePreference => {
+      try {
+        const stored = localStorage.getItem(THEME_STORAGE_KEY);
+        return isThemePreference(stored) ? stored : "system";
+      } catch {
+        return "system";
+      }
     };
 
-    const themePreference = getThemePreference();
-    const isDark =
-      themePreference === DARK ||
-      (themePreference === SYSTEM && matchMedia.matches);
+    // Refleja el tema activo en el ícono, en el texto del botón y en las opciones
+    const updateUI = (pref: ThemePreference) => {
+      document.documentElement.dataset.theme = pref;
+      toggleLabel.textContent = `Tema: ${LABELS[pref]}. Elige un tema`;
+      options.forEach((option) =>
+        option.setAttribute("aria-pressed", String(option.dataset.theme === pref)),
+      );
+    };
 
-    updateIcon(themePreference);
-    document.documentElement.classList.toggle("dark", isDark);
-  };
+    const updateTheme = () => {
+      const pref = getThemePreference();
+      const isDark = pref === "dark" || (pref === "system" && prefersDark.matches);
+      document.documentElement.classList.toggle("dark", isDark);
+      updateUI(pref);
+    };
 
-  updateTheme();
+    const setMenuOpen = (open: boolean) => {
+      themesMenu.classList.toggle("open", open);
+      toggleBtn.setAttribute("aria-expanded", String(open));
+    };
 
-  // Cierra el menú al hacer clic en cualquier parte
-  document.addEventListener("click", () => {
-    themesMenu.classList.remove("open");
-  });
+    prefersDark.addEventListener("change", updateTheme);
+    updateTheme();
 
-  // Abre / cierra el menú con el botón
-  toggleBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    themesMenu.classList.toggle("open");
-  });
+    // Abre / cierra el menú con el botón
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setMenuOpen(!themesMenu.classList.contains("open"));
+    });
 
-  // Elige el tema desde el menú
-  document
-    .querySelectorAll<HTMLButtonElement>(".themes-menu-option")
-    .forEach((element) => {
-      element.addEventListener("click", (e) => {
-        const theme = (e.currentTarget as HTMLElement).dataset
-          .theme as ThemePreference;
+    // Cierra el menú al hacer clic en cualquier parte
+    document.addEventListener("click", () => setMenuOpen(false));
+
+    // Cierra con Escape y devuelve el foco al botón
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && themesMenu.classList.contains("open")) {
+        setMenuOpen(false);
+        toggleBtn.focus();
+      }
+    });
+
+    // Elige el tema desde el menú
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        const theme = option.dataset.theme;
+        if (!isThemePreference(theme)) return;
         try {
           localStorage.setItem(THEME_STORAGE_KEY, theme);
         } catch {}
         updateTheme();
+        setMenuOpen(false);
+        toggleBtn.focus();
       });
     });
+  }
+
+  initThemeToggle();
 </script>
