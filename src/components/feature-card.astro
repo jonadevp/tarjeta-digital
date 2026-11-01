@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const { title, description, icon } = Astro.props;
+---
+
+<article
+  class="rounded-xl border border-slate-200 bg-white/60 p-4 backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/40"
+>
+  <div
+    class="grid size-11 place-items-center rounded-lg bg-indigo-500/15 text-indigo-600 dark:text-indigo-300"
+  >
+    <svg
+      class="size-6"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      set:html={icon}
+    />
+  </div>
+  <h3 class="mt-4 font-display text-lg font-semibold text-slate-900 dark:text-white">
+    {title}
+  </h3>
+  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+    {description}
+  </p>
+</article>
