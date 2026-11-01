@@ -1,0 +1,216 @@
+---
+import SectionContainer from "@components/section-container.astro";
+import { CONTACT_LIMITS, TYPE_PROJECTS } from "@/constants/contact";
+
+const fieldClass =
+  "block w-full rounded-lg border border-slate-300 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 shadow-sm backdrop-blur transition focus:border-indigo-500 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 aria-invalid:border-red-500 aria-invalid:focus:ring-red-500 dark:border-slate-700 dark:bg-slate-900/60 dark:text-white dark:placeholder:text-slate-400 dark:focus:border-indigo-400 dark:aria-invalid:border-red-400";
+const labelClass = "mb-1.5 block text-sm font-medium text-slate-800 dark:text-slate-200";
+const errorClass = "mt-1 block min-h-5 text-xs text-red-600 dark:text-red-400";
+---
+
+<SectionContainer
+  id="contacto"
+  labelledby="contacto-title"
+  class="max-w-2xl scroll-mt-20 py-16 sm:py-24"
+>
+  <div class="relative isolate">
+    <!-- Destellos detrás de la tarjeta de vidrio -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+      <div class="absolute -top-10 -left-10 size-64 rounded-full bg-indigo-500/25 blur-3xl dark:bg-indigo-500/20"></div>
+      <div class="absolute -right-10 -bottom-10 size-64 rounded-full bg-fuchsia-400/20 blur-3xl dark:bg-fuchsia-500/15"></div>
+    </div>
+
+    <div
+      class="rounded-3xl border border-white/60 bg-white/60 p-6 shadow-2xl shadow-indigo-500/10 ring-1 ring-slate-900/5 backdrop-blur-xl sm:p-10 dark:border-slate-700/60 dark:bg-slate-900/60 dark:ring-white/5"
+    >
+      <div class="text-center">
+        <h2
+          id="contacto-title"
+          class="font-display text-3xl font-bold tracking-tight text-balance text-slate-900 sm:text-4xl dark:text-white"
+        >
+          Hablemos de tu proyecto
+        </h2>
+        <p class="mx-auto mt-3 max-w-md text-pretty text-slate-600 dark:text-slate-400">
+          Cuéntame qué necesitas.
+        </p>
+      </div>
+
+      <form id="whatsapp-form" novalidate class="mt-8 grid gap-x-5 gap-y-1 sm:grid-cols-2">
+        <div>
+          <label for="fullname" class={labelClass}>Nombre</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            autocomplete="name"
+            maxlength={CONTACT_LIMITS.fullnameMax}
+            placeholder="Ej. María López"
+            aria-describedby="fullname-error"
+            class={fieldClass}
+          />
+          <span id="fullname-error" class={errorClass}></span>
+        </div>
+
+        <div>
+          <label for="type_project" class={labelClass}>Qué necesitas</label>
+          <div class="relative">
+            <select
+              id="type_project"
+              name="type_project"
+              aria-describedby="type_project-error"
+              class:list={[fieldClass, "appearance-none pr-10"]}
+            >
+              <option value="" selected disabled>Elige una opción</option>
+              {TYPE_PROJECTS.map((type_project) => <option value={type_project}>{type_project}</option>)}
+            </select>
+            <svg
+              class="pointer-events-none absolute top-1/2 right-3 size-5 -translate-y-1/2 text-slate-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <span id="type_project-error" class={errorClass}></span>
+        </div>
+
+        <div class="sm:col-span-2">
+          <div class="flex items-baseline justify-between">
+            <label for="message" class={labelClass}>Mensaje</label>
+            <span
+              id="message-count"
+              class="text-xs text-slate-600 tabular-nums dark:text-slate-400"
+              aria-hidden="true"
+            >
+              0/{CONTACT_LIMITS.messageMax}
+            </span>
+          </div>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            maxlength={CONTACT_LIMITS.messageMax}
+            placeholder="Cuéntame de tu proyecto y qué te gustaría lograr con tu página."
+            aria-describedby="message-error"
+            class:list={[fieldClass, "resize-none"]}></textarea>
+          <span id="message-error" class={errorClass}></span>
+        </div>
+
+        <div class="mt-2 flex flex-col items-center gap-3 sm:col-span-2">
+          <button
+            type="submit"
+            class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5 hover:bg-indigo-500 hover:shadow-indigo-500/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto"
+          >
+            <svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35ZM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.2-3.58.93.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.41 9.41 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46Zm8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2.01.52 3.97 1.52 5.69L.55 23.62l6.04-1.58a11.36 11.36 0 0 0 5.44 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.19-5.9-3.33-8.05Z"
+              ></path>
+            </svg>
+            Continuar en WhatsApp
+          </button>
+          <p class="text-center text-xs text-slate-600 dark:text-slate-400">
+            Se abrirá WhatsApp con tu mensaje listo para enviar.
+          </p>
+          <p
+            id="form-status"
+            role="status"
+            aria-live="polite"
+            class="min-h-5 text-center text-sm text-slate-700 dark:text-slate-300"
+          >
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</SectionContainer>
+
+<script>
+  import { CONTACT_LIMITS, whatsappLink } from "@/constants/contact";
+  import { contactSchema } from "@/schemas/contact"; // ajusta la ruta si lo guardaste en otro lugar
+
+  type FieldName = keyof typeof contactSchema.shape;
+  type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+  const form = document.querySelector<HTMLFormElement>("#whatsapp-form");
+  const status = document.querySelector<HTMLParagraphElement>("#form-status");
+  const counter = document.querySelector<HTMLSpanElement>("#message-count");
+
+  if (form && status) {
+    const fields = {
+      fullname: form.elements.namedItem("fullname") as HTMLInputElement,
+      type_project: form.elements.namedItem("type_project") as HTMLSelectElement,
+      message: form.elements.namedItem("message") as HTMLTextAreaElement,
+    } satisfies Record<FieldName, Field>;
+
+    const names = Object.keys(fields) as FieldName[];
+
+    const validate = (name: FieldName): boolean => {
+      const field = fields[name];
+      const result = contactSchema.shape[name].safeParse(field.value);
+      const error = result.success ? "" : (result.error.issues[0]?.message ?? "Dato no válido.");
+      const errorEl = document.getElementById(`${name}-error`);
+      if (errorEl) errorEl.textContent = error;
+      if (error) field.setAttribute("aria-invalid", "true");
+      else field.removeAttribute("aria-invalid");
+      return !error;
+    };
+
+    names.forEach((name) => {
+      const field = fields[name];
+      // Revalida mientras escribe solo si el campo ya mostró un error
+      field.addEventListener("input", () => {
+        if (field.hasAttribute("aria-invalid")) validate(name);
+      });
+      field.addEventListener("blur", () => {
+        if (field.value.trim()) validate(name);
+      });
+    });
+
+    fields.type_project.addEventListener("change", () => validate("type_project"));
+
+    fields.message.addEventListener("input", () => {
+      if (counter) counter.textContent = `${fields.message.value.length}/${CONTACT_LIMITS.messageMax}`;
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      status.textContent = "";
+
+      const invalid = names.filter((name) => !validate(name));
+      if (invalid.length) {
+        fields[invalid[0]].focus();
+        return;
+      }
+
+      // Datos ya recortados y validados por Zod
+      const parsed = contactSchema.safeParse({
+        fullname: fields.fullname.value,
+        type_project: fields.type_project.value,
+        message: fields.message.value,
+      });
+      if (!parsed.success) return;
+
+      const { fullname, type_project, message } = parsed.data;
+      const url = whatsappLink(
+        `Hola Jonathan, soy ${fullname}.\nMe interesa: ${type_project}.\n\n${message}`,
+      );
+
+      // Se abre directo dentro del clic (sin await antes), para que no lo bloquee el navegador.
+      // Con noopener, window.open siempre devuelve null, así que no se puede saber si abrió:
+      // por eso el enlace de respaldo se muestra siempre.
+      window.open(url, "_blank", "noopener,noreferrer");
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = "font-medium text-indigo-600 underline underline-offset-4 dark:text-indigo-300";
+      link.textContent = "Ábrelo aquí";
+      status.replaceChildren("¿No se abrió WhatsApp? ", link, ".");
+    });
+  }
+</script>
