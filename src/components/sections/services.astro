@@ -1,0 +1,92 @@
+---
+import SectionContainer from "@components/section-container.astro";
+import ServiceCard from "@components/service-card.astro";
+import { whatsappLink } from "@/constants/contact";
+
+const services = [
+  {
+    title: "Landing page",
+    idealFor: "una sola oferta",
+    description:
+      "Una página enfocada en un solo objetivo: que la persona que llega a tu página te escriba o compre.",
+    features: [
+      "Diseño claro, pensado para que te contacten",
+      "Botón directo a WhatsApp",
+      "Carga rápida en celular",
+      "Vista previa con imagen al compartir en redes",
+      "SEO básico para que Google te encuentre",
+    ],
+    icon: '<path d="M4 20 20 4"/><path d="M9 4h11v11"/>',
+  },
+  {
+    title: "Sitio web informativo",
+    idealFor: "negocios, proyectos y profesionistas",
+    description:
+      "Tu proyecto o negocio en internet con varias secciones: quiénes son, qué ofrecen y cómo contactarlos.",
+    features: [
+      "Varias páginas o secciones",
+      "Mapa, datos de contacto y formulario",
+      "Galería de productos o trabajos",
+      "SEO básico para que Google te encuentre",
+    ],
+    icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 14h8"/>',
+  },
+
+  {
+    title: "Porfolio",
+    idealFor: "profesionistas y creativos",
+    description:
+      "Muestra quién eres y qué has hecho en una página propia.",
+    features: [
+      "Galería de tus proyectos",
+      "Sección sobre ti y tu experiencia",
+      "Botón directo a WhatsApp",
+      "SEO básico para que Google te encuentre",
+    ],
+    icon: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  },
+];
+---
+
+<SectionContainer id="servicios" labelledby="servicios-title" class="max-w-5xl scroll-mt-20 pt-20">
+  <div class="text-center">
+    <p class="text-sm font-semibold tracking-wide text-indigo-600 uppercase dark:text-indigo-300">
+      Servicios
+    </p>
+    <h2
+      id="servicios-title"
+      class="mt-2 font-display text-3xl font-bold tracking-tight text-balance text-slate-900 sm:text-4xl dark:text-white"
+    >
+      La página que necesitas
+    </h2>
+    <p class="mx-auto mt-3 max-w-lg text-pretty text-slate-600 dark:text-slate-400">
+      Elige el tipo de sitio según tu objetivo. Si no sabes cuál te conviene, escríbeme y
+      te ayudo a decidir.
+    </p>
+  </div>
+
+  <div class="mt-12 grid gap-6 lg:grid-cols-3">
+    {
+      services.map((service) => (
+        <ServiceCard
+          {...service}
+          href={whatsappLink(
+            `Hola Jonathan, me interesa cotizar: ${service.title.toLowerCase()}.`,
+          )}
+        />
+      ))
+    }
+  </div>
+
+  <p class="mt-10 text-center text-sm text-slate-600 dark:text-slate-400">
+    ¿Necesitas un blog, una tienda en línea u otra cosa?
+    <a
+      href={whatsappLink("Hola Jonathan, quiero cotizar un proyecto personalizado (blog, tienda en línea u otro).")}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="font-medium text-indigo-600 underline-offset-4 hover:underline dark:text-indigo-300"
+    >
+      Pide una cotización personalizada
+    </a>
+  </p>
+</SectionContainer>
