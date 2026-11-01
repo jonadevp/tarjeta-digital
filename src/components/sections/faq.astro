@@ -1,0 +1,170 @@
+---
+import SectionContainer from "@components/section-container.astro";
+import { whatsappLink } from "@/constants/contact";
+
+const faqs = [
+  {
+    question: "¿Cuánto cuesta una página web?",
+    answer:
+      "Depende del tipo de sitio y de lo que necesites. Escríbeme por WhatsApp, cuéntame de tu proyecto y te envío una cotización sin compromiso.",
+  },
+  {
+    question: "¿Cuánto tiempo tarda en estar lista?",
+    answer:
+      "Una landing page suele estar lista en pocos días; un sitio informativo puede tardar un poco más. Al cotizar te doy una fecha de entrega clara.",
+  },
+  {
+    question: "¿Puedo ver cómo queda antes de pagar?",
+    answer:
+      "Sí. Te muestro una demo en vivo sin costo: agendamos un rato y la ves en tu celular antes de decidir.",
+  },
+  {
+    question: "¿Necesito tener dominio y hosting?",
+    answer:
+      "No te preocupes por eso. Te ayudo a elegir y configurar tu dominio (por ejemplo, tupagina.com) y dejo la página publicada y funcionando. Ambos quedan a tu nombre y los pagas directamente al proveedor.",
+  },
+  {
+    question: "¿Qué necesito para empezar?",
+    answer:
+      "Solo la información de tu proyecto o negocio: logo, fotos, servicios o productos y tus datos de contacto. Si no tienes todo, te oriento con lo que falte.",
+  },
+  {
+    question: "¿Qué pasa si después quiero hacer cambios?",
+    answer:
+      "Incluyo 1 mes de mantenimiento con cambios menores después de publicar. Pasado ese tiempo, los cambios se cotizan según lo que necesites.",
+  },
+  {
+    question: "¿Mi página aparecerá en Google?",
+    answer:
+      "Tu sitio se entrega con SEO básico y registrado en Google y Bing para que puedan encontrarlo. Aparecer en los primeros lugares depende del contenido, la competencia y el tiempo, y nadie puede garantizarlo.",
+  },
+];
+---
+
+<SectionContainer
+  id="preguntas"
+  labelledby="faq-title"
+  class="max-w-3xl scroll-mt-20"
+>
+  <div class="text-center">
+    <p
+      class="text-sm font-semibold tracking-wide text-indigo-600 uppercase dark:text-indigo-300"
+    >
+      Preguntas frecuentes
+    </p>
+    <h2
+      id="faq-title"
+      class="mt-2 font-display text-3xl font-bold tracking-tight text-balance text-slate-900 sm:text-4xl dark:text-white"
+    >
+      Resuelve tus dudas
+    </h2>
+    <p
+      class="mx-auto mt-3 max-w-md text-pretty text-slate-600 dark:text-slate-400"
+    >
+      Lo que más me preguntan antes de empezar un proyecto.
+    </p>
+  </div>
+
+  <div data-accordion class="mt-10 space-y-3">
+    {
+      faqs.map(({ question, answer }, index) => {
+        const isOpen = index === 0;
+        return (
+          <div
+            data-faq-item
+            data-open={isOpen ? "true" : "false"}
+            class="group/item rounded-xl border border-slate-200 bg-white/60 backdrop-blur transition-colors data-[open=true]:border-indigo-400/50 dark:border-slate-700/60 dark:bg-slate-800/40 dark:data-[open=true]:border-indigo-400/40"
+          >
+            <h3>
+              <button
+                type="button"
+                id={`faq-button-${index}`}
+                aria-expanded={isOpen ? "true" : "false"}
+                aria-controls={`faq-panel-${index}`}
+                class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-xl px-5 py-4 text-left font-sans font-medium text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:text-white"
+              >
+                {question}
+                <span class="grid size-7 shrink-0 place-items-center rounded-full bg-indigo-500/10 text-indigo-600 transition-transform duration-300 group-data-[open=true]/item:rotate-45 motion-reduce:transition-none dark:text-indigo-300">
+                  <svg
+                    class="size-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                  </svg>
+                </span>
+              </button>
+            </h3>
+            <div
+              data-faq-panel
+              id={`faq-panel-${index}`}
+              inert={!isOpen}
+              class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-data-[open=true]/item:grid-rows-[1fr] motion-reduce:transition-none"
+            >
+              <div class="min-h-0 overflow-hidden">
+                <p class="px-5 pb-5 text-sm text-pretty text-slate-600 dark:text-slate-400">
+                  {answer}
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <div
+    class="mt-10 flex flex-col items-center gap-4 rounded-2xl border border-slate-200 bg-linear-to-br from-indigo-500/10 to-fuchsia-500/10 p-6 text-center sm:flex-row sm:justify-between sm:text-left dark:border-slate-700/60"
+  >
+    <div>
+      <p
+        class="font-display text-lg font-semibold text-slate-900 dark:text-white"
+      >
+        ¿Tienes otra pregunta?
+      </p>
+      <p class="text-sm text-slate-600 dark:text-slate-400">
+        Escríbeme y te respondo personalmente.
+      </p>
+    </div>
+    <a
+      href={whatsappLink(
+        "Hola Jonathan, tengo una pregunta sobre tus servicios.",
+      )}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex shrink-0 items-center justify-center rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5 hover:bg-indigo-500"
+    >
+      Preguntar por WhatsApp
+    </a>
+  </div>
+</SectionContainer>
+
+<script>
+  const containerEl = document.querySelector<HTMLElement>("[data-accordion]");
+
+  if (containerEl) {
+    const items = containerEl.querySelectorAll<HTMLElement>("[data-faq-item]");
+
+    const setOpen = (item: HTMLElement, open: boolean) => {
+      const button = item.querySelector<HTMLButtonElement>("button");
+      const panel = item.querySelector<HTMLElement>("[data-faq-panel]");
+      if (!button || !panel) return;
+      item.dataset.open = String(open);
+      button.setAttribute("aria-expanded", String(open));
+      panel.inert = !open;
+    };
+
+    containerEl.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      const button = target.closest<HTMLButtonElement>("button");
+      const item = button?.closest<HTMLElement>("[data-faq-item]");
+      if (!button || !item) return;
+
+      const willOpen = item.dataset.open !== "true";
+      items.forEach((other) =>
+        setOpen(other, other === item ? willOpen : false),
+      );
+    });
+  }
+</script>
