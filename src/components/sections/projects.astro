@@ -1,0 +1,161 @@
+---
+import SectionContainer from "@components/section-container.astro";
+import ProjectCard from "@components/project-card.astro";
+import { projects } from "@/data/projects";
+import { whatsappLink } from "@/constants/contact";
+---
+
+<SectionContainer
+  id="proyectos"
+  labelledby="proyectos-title"
+  class="max-w-5xl scroll-mt-20"
+>
+  <div class="text-center">
+    <p class="text-sm font-semibold tracking-wide text-indigo-600 uppercase dark:text-indigo-300">
+      Proyectos
+    </p>
+    <h2
+      id="proyectos-title"
+      class="mt-2 font-display text-3xl font-bold tracking-tight text-balance text-slate-900 sm:text-4xl dark:text-white"
+    >
+      Así pueden verse tus ideas
+    </h2>
+    <p class="mx-auto mt-3 max-w-lg text-pretty text-slate-600 dark:text-slate-400">
+      Proyectos conceptuales: diseños de práctica con contenido de ejemplo, sin vínculo con
+      ninguna organización real.
+    </p>
+  </div>
+
+  <div
+    data-carousel
+    role="region"
+    aria-roledescription="carrusel"
+    aria-label="Proyectos conceptuales"
+    class="relative mt-12"
+  >
+    <ul
+      id="proyectos-lista"
+      data-carousel-track
+      role="list"
+      tabindex="0"
+      class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 [&::-webkit-scrollbar]:hidden"
+    >
+      {
+        projects.map((project, index) => (
+          <li class="min-w-0 shrink-0 basis-[85%] snap-center sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)]">
+            <ProjectCard project={project} index={index} />
+          </li>
+        ))
+      }
+    </ul>
+
+    <div
+      data-carousel-controls
+      class="pointer-events-none absolute inset-x-0 top-0 bottom-4 hidden"
+    >
+      <button
+        type="button"
+        data-dir="prev"
+        aria-controls="proyectos-lista"
+        aria-label="Proyecto anterior"
+        class="pointer-events-auto absolute top-1/2 left-2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white/90 text-slate-700 shadow-md backdrop-blur transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 enabled:hover:border-indigo-400 enabled:hover:text-indigo-600 disabled:pointer-events-none disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:enabled:hover:text-indigo-300"
+      >
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <button
+        type="button"
+        data-dir="next"
+        aria-controls="proyectos-lista"
+        aria-label="Siguiente proyecto"
+        class="pointer-events-auto absolute top-1/2 right-2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white/90 text-slate-700 shadow-md backdrop-blur transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 enabled:hover:border-indigo-400 enabled:hover:text-indigo-600 disabled:pointer-events-none disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200 dark:enabled:hover:text-indigo-300"
+      >
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-10 text-center">
+    <a
+      href={whatsappLink("Hola Jonathan, vi tus proyectos y quiero una página para mi proyecto.")}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5 hover:bg-indigo-500"
+    >
+      Quiero una página así
+    </a>
+  </div>
+</SectionContainer>
+
+<script>
+  function initCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLUListElement>("[data-carousel-track]");
+    const controls = root.querySelector<HTMLElement>("[data-carousel-controls]");
+    const prev = root.querySelector<HTMLButtonElement>('[data-dir="prev"]');
+    const next = root.querySelector<HTMLButtonElement>('[data-dir="next"]');
+    if (!track || !controls || !prev || !next) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    // Ancho de una tarjeta + el gap de la lista (se lee del CSS, no se repite aquí)
+    const getStep = (): number => {
+      const first = track.firstElementChild as HTMLElement | null;
+      if (!first) return track.clientWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return first.getBoundingClientRect().width + gap;
+    };
+
+    const update = () => {
+      const overflow = track.scrollWidth - track.clientWidth > 1;
+      controls.classList.toggle("hidden", !overflow);
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    };
+
+    const move = (dir: 1 | -1) => {
+      track.scrollBy({
+        left: dir * getStep(),
+        behavior: reduceMotion.matches ? "auto" : "smooth",
+      });
+    };
+
+    prev.addEventListener("click", () => move(-1));
+    next.addEventListener("click", () => move(1));
+
+    let frame = 0;
+    track.addEventListener(
+      "scroll",
+      () => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(update);
+      },
+      { passive: true },
+    );
+
+    new ResizeObserver(update).observe(track);
+    update();
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach(initCarousel);
+</script>
