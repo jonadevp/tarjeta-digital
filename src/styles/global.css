@@ -11,6 +11,7 @@
   html {
     color-scheme: light;
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
   html.dark {
     color-scheme: dark;
@@ -25,6 +26,13 @@
 
   h1, h2, h3 {
     @apply font-display;
+  }
+
+  /* Foco visible y consistente para teclado en todo el sitio.
+     Las utilidades focus-visible:* de cada componente lo pueden sobrescribir. */
+  :focus-visible {
+    outline: 2px solid var(--color-indigo-500);
+    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
