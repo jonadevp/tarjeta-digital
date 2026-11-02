@@ -8,7 +8,7 @@ import { whatsappLink } from "@/constants/contact";
 <SectionContainer
   id="proyectos"
   labelledby="proyectos-title"
-  class="max-w-5xl scroll-mt-20"
+  class="max-w-5xl"
 >
   <div class="text-center">
     <p class="text-sm font-semibold tracking-wide text-indigo-600 uppercase dark:text-indigo-300">
@@ -38,6 +38,7 @@ import { whatsappLink } from "@/constants/contact";
       data-carousel-track
       role="list"
       tabindex="0"
+      aria-label="Lista de proyectos"
       class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 [&::-webkit-scrollbar]:hidden"
     >
       {
@@ -104,6 +105,7 @@ import { whatsappLink } from "@/constants/contact";
       class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5 hover:bg-indigo-500"
     >
       Quiero una página así
+      <span class="sr-only">(se abre en una pestaña nueva)</span>
     </a>
   </div>
 </SectionContainer>
