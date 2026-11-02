@@ -48,7 +48,7 @@ const services = [
 ];
 ---
 
-<SectionContainer id="servicios" labelledby="servicios-title" class="max-w-5xl scroll-mt-20 pt-20">
+<SectionContainer id="servicios" labelledby="servicios-title" class="max-w-5xl pt-20">
   <div class="text-center">
     <p class="text-sm font-semibold tracking-wide text-indigo-600 uppercase dark:text-indigo-300">
       Servicios
@@ -65,7 +65,7 @@ const services = [
     </p>
   </div>
 
-  <div class="mt-12 grid gap-6 lg:grid-cols-3 animate-blurred-fade-in">
+  <div class="mt-12 grid gap-6 lg:grid-cols-3 motion-safe:animate-blurred-fade-in">
     {
       services.map((service) => (
         <ServiceCard
@@ -87,6 +87,7 @@ const services = [
       class="font-medium text-indigo-600 underline-offset-4 hover:underline dark:text-indigo-300"
     >
       Pide una cotización personalizada
+      <span class="sr-only">(se abre en una pestaña nueva)</span>
     </a>
   </p>
 </SectionContainer>
