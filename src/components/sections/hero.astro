@@ -40,7 +40,7 @@ const highlights = [
         class="hero-reveal inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-700 dark:text-indigo-300"
       >
         <span class="relative flex size-2">
-          <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="absolute inline-flex size-full motion-safe:animate-ping rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
         </span>
         Disponible para nuevos proyectos
@@ -52,7 +52,7 @@ const highlights = [
       >
          Tu página web,{" "}
         <span
-          class="bg-linear-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">lista en pocos días
+          class="bg-linear-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent forced-colors:bg-none forced-colors:text-[CanvasText]">lista en pocos días
         </span>
       </h1>
 
@@ -94,6 +94,7 @@ const highlights = [
             ></path>
           </svg>
           Cotiza por WhatsApp
+          <span class="sr-only">(se abre en una pestaña nueva)</span>
         </a>
         <a
           href="#servicios"
