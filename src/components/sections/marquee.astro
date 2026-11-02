@@ -1,6 +1,4 @@
 ---
-import SectionContainer from "@components/section-container.astro";
-
 const items = [
     "Landing page",
     "Porfolios",
@@ -12,9 +10,9 @@ const items = [
 const copies = [0, 1,2,3]
 ---
 
-<div class="bg-slate-900">
+<div data-marquee class="relative bg-slate-900">
     <div class="overflow-hidden py-6 mx-auto mask-[linear-gradient(to_right,transparent_0,#ffffff_128px,#ffffff_calc(100%-128px),transparent_100%)]">
-        <div class="marquee-track flex w-max">
+        <div class="marquee-track flex w-max" data-paused="false">
             {
                 copies.map((copy) => (
                   <ul
@@ -33,6 +31,24 @@ const copies = [0, 1,2,3]
 
         </div>
     </div>
+
+    <!-- Pausa / reanuda la animación (WCAG 2.2.2). Se oculta si el usuario pidió reducir movimiento -->
+    <button
+        type="button"
+        data-marquee-toggle
+        aria-pressed="false"
+        aria-label="Pausar animación"
+        class="group absolute top-1/2 right-2 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-slate-800/90 text-white transition-colors hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 motion-reduce:hidden"
+    >
+        <!-- Ícono de pausa (animación en marcha) -->
+        <svg class="size-4 group-aria-pressed:hidden" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M5.75 3a.75.75 0 0 0-.75.75v12.5c0 .41.34.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75A.75.75 0 0 0 7.25 3h-1.5ZM12.75 3a.75.75 0 0 0-.75.75v12.5c0 .41.34.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75a.75.75 0 0 0-.75-.75h-1.5Z" />
+        </svg>
+        <!-- Ícono de reproducir (animación en pausa) -->
+        <svg class="hidden size-4 group-aria-pressed:block" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M6.3 2.84A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.27l9.34-5.89a1.5 1.5 0 0 0 0-2.54L6.3 2.84Z" />
+        </svg>
+    </button>
 </div>
 
 <style>
@@ -40,7 +56,8 @@ const copies = [0, 1,2,3]
     animation: marquee 40s linear infinite;
   }
 
-  .marquee-track:hover {
+  .marquee-track:hover,
+  .marquee-track[data-paused="true"] {
     animation-play-state: paused;
   }
 
@@ -59,3 +76,18 @@ const copies = [0, 1,2,3]
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-marquee]").forEach((root) => {
+    const track = root.querySelector<HTMLElement>(".marquee-track");
+    const toggle = root.querySelector<HTMLButtonElement>("[data-marquee-toggle]");
+    if (!track || !toggle) return;
+
+    toggle.addEventListener("click", () => {
+      const paused = toggle.getAttribute("aria-pressed") !== "true";
+      // La etiqueta "Pausar animación" no cambia: el estado lo comunica aria-pressed
+      toggle.setAttribute("aria-pressed", String(paused));
+      track.dataset.paused = String(paused);
+    });
+  });
+</script>
