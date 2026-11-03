@@ -1,0 +1,250 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { whatsappLink } from "@/constants/contact";
+
+const waUrl = whatsappLink("Hola Jonathan, quiero información sobre tus servicios.");
+
+const links = [
+  {
+    href: "/",
+    title: "Página de inicio",
+    description: "No hay lugar como el hogar…",
+    icon: "home",
+  },
+  {
+    href: "/#proyectos",
+    title: "Proyectos",
+    description: "Donde el trabajo habla por sí solo",
+    icon: "eye",
+  },
+  {
+    href: waUrl,
+    title: "WhatsApp",
+    description: "Escríbeme y lo resolvemos juntos",
+    icon: "chat",
+    external: true,
+  },
+] as const;
+---
+
+<Layout
+  title="Página no encontrada | Jonadevp"
+  description="La página que buscas no existe."
+>
+  <section
+    aria-labelledby="error-title"
+    class="relative isolate overflow-hidden px-4 pt-32 pb-24 sm:pt-36"
+  >
+    <!-- Arcos concéntricos de fondo -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 top-24 -z-10 flex justify-center"
+    >
+      <svg
+        viewBox="0 0 1200 800"
+        class="h-190 w-300 max-w-none text-slate-200 dark:text-slate-800"
+        fill="none"
+        stroke="currentColor"
+      >
+        <circle cx="600" cy="420" r="300" stroke-width="1" />
+        <circle cx="600" cy="420" r="390" stroke-width="1" stroke-dasharray="2 6" />
+        <circle cx="600" cy="420" r="480" stroke-width="1" />
+        <circle cx="600" cy="420" r="580" stroke-width="1" stroke-dasharray="1 8" />
+      </svg>
+      <div
+        class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--color-white)_75%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--color-neutral-950)_75%)]"
+      >
+      </div>
+    </div>
+
+    <div class="mx-auto flex max-w-2xl flex-col items-center text-center">
+      <p
+        class="text-sm text-slate-500 motion-safe:animate-fade-in-up motion-safe:animate-duration-400 dark:text-slate-400"
+      >
+        Parece que te perdiste un poco…
+      </p>
+
+      <div class="relative mt-3">
+        <!-- Decoración: nube -->
+        <span
+          aria-hidden="true"
+          class="absolute -top-5 -left-6 grid size-11 place-items-center rounded-2xl bg-white/70 shadow-lg shadow-indigo-500/20 ring-1 ring-slate-200 backdrop-blur motion-safe:animate-float sm:-left-10 dark:bg-slate-900/70 dark:ring-slate-700"
+        >
+          <svg viewBox="0 0 24 24" class="size-6" fill="url(#grad-cloud)">
+            <defs>
+              <linearGradient id="grad-cloud" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#a5b4fc" />
+                <stop offset="1" stop-color="#c084fc" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M7 18a5 5 0 0 1-.5-9.98A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9H7Z"
+            />
+          </svg>
+        </span>
+
+        <h1
+          id="error-title"
+          class="font-display text-4xl font-bold tracking-tight text-balance text-slate-900 motion-safe:animate-fade-in-up motion-safe:animate-duration-500 sm:text-6xl dark:text-white"
+        >
+          ¡Ups! Página no encontrada
+        </h1>
+
+        <!-- Decoración: corazón -->
+        <span
+          aria-hidden="true"
+          class="absolute -right-4 -bottom-6 grid size-11 place-items-center rounded-2xl bg-white/70 shadow-lg shadow-fuchsia-500/20 ring-1 ring-slate-200 backdrop-blur motion-safe:animate-float motion-safe:animate-delay-500 sm:-right-8 dark:bg-slate-900/70 dark:ring-slate-700"
+        >
+          <svg viewBox="0 0 24 24" class="size-6" fill="url(#grad-heart)">
+            <defs>
+              <linearGradient id="grad-heart" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#e879f9" />
+                <stop offset="1" stop-color="#818cf8" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 5.2 3 1.6-1.9 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21Z"
+            />
+          </svg>
+        </span>
+      </div>
+
+      <p
+        class="mt-6 max-w-md leading-relaxed text-pretty text-slate-600 motion-safe:animate-fade-in-up motion-safe:animate-duration-600 dark:text-slate-400"
+      >
+        El enlace puede estar mal escrito o ya no existir. Si buscabas algo en
+        concreto,
+        <code
+          class="rounded-md bg-slate-100 px-1.5 py-0.5 font-sans text-sm font-medium text-slate-800 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700"
+          >escríbeme</code
+        >
+        y lo
+        <code
+          class="rounded-md bg-slate-100 px-1.5 py-0.5 font-sans text-sm font-medium text-slate-800 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700"
+          >encontramos</code
+        >
+        juntos.
+      </p>
+
+      <!-- Ilustración: OVNI -->
+      <div
+        aria-hidden="true"
+        class="relative my-10 grid h-56 w-full max-w-sm place-items-center"
+      >
+        <div
+          class="absolute inset-0 m-auto size-56 rounded-full bg-[radial-gradient(circle,var(--color-indigo-300)_0%,var(--color-fuchsia-200)_40%,transparent_70%)] opacity-70 blur-2xl dark:bg-[radial-gradient(circle,var(--color-indigo-600)_0%,var(--color-fuchsia-800)_40%,transparent_70%)] dark:opacity-50"
+        >
+        </div>
+
+        <!-- Destellos -->
+        <svg class="absolute top-[62%] left-[18%] size-3 text-indigo-400 motion-safe:animate-pulse" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5Z" /></svg>
+        <svg class="absolute top-[78%] left-[48%] size-2.5 text-slate-400 motion-safe:animate-pulse motion-safe:animate-delay-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5Z" /></svg>
+        <svg class="absolute top-[64%] right-[16%] size-3.5 text-fuchsia-400 motion-safe:animate-pulse motion-safe:animate-delay-700" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5Z" /></svg>
+        <svg class="absolute top-[18%] left-[28%] size-2 text-indigo-300 motion-safe:animate-pulse motion-safe:animate-delay-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5Z" /></svg>
+
+        <svg
+          viewBox="0 0 240 160"
+          class="relative w-64 drop-shadow-[0_20px_25px_rgba(79,70,229,0.25)] motion-safe:animate-float"
+        >
+          <defs>
+            <linearGradient id="ufo-dome" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#475569" />
+              <stop offset="1" stop-color="#0f172a" />
+            </linearGradient>
+            <linearGradient id="ufo-disc" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#f1f5f9" />
+              <stop offset=".55" stop-color="#94a3b8" />
+              <stop offset="1" stop-color="#475569" />
+            </linearGradient>
+            <linearGradient id="ufo-bolt" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#c4b5fd" />
+              <stop offset="1" stop-color="#7c3aed" />
+            </linearGradient>
+          </defs>
+
+          <!-- Rayo -->
+          <path d="M168 8l-14 22h10l-6 18 18-26h-11l7-14Z" fill="url(#ufo-bolt)" />
+
+          <!-- Cúpula -->
+          <path d="M66 92c0-34 24-58 54-58s54 24 54 58Z" fill="url(#ufo-dome)" />
+          <ellipse cx="98" cy="54" rx="14" ry="7" fill="#fff" opacity=".25" transform="rotate(-25 98 54)" />
+          <circle cx="94" cy="76" r="7" fill="#cbd5e1" />
+          <circle cx="120" cy="66" r="7" fill="#cbd5e1" />
+          <circle cx="146" cy="76" r="7" fill="#cbd5e1" />
+
+          <!-- Disco -->
+          <ellipse cx="120" cy="100" rx="104" ry="24" fill="url(#ufo-disc)" />
+          <ellipse cx="120" cy="94" rx="80" ry="12" fill="#e2e8f0" opacity=".6" />
+          <g fill="#334155">
+            <circle cx="52" cy="104" r="4" />
+            <circle cx="84" cy="111" r="4" />
+            <circle cx="120" cy="114" r="4" />
+            <circle cx="156" cy="111" r="4" />
+            <circle cx="188" cy="104" r="4" />
+          </g>
+          <ellipse cx="120" cy="124" rx="34" ry="6" fill="#64748b" />
+        </svg>
+      </div>
+
+      <!-- Enlaces -->
+      <nav aria-label="Enlaces útiles" class="w-full max-w-sm">
+        <ul class="flex flex-col gap-3">
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  {...("external" in link && link.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  class="group flex items-center gap-4 rounded-2xl bg-white p-4 text-left shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md hover:ring-indigo-200 dark:bg-slate-900 dark:ring-slate-800 dark:hover:ring-indigo-500/40"
+                >
+                  <span class="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-800 transition group-hover:bg-indigo-50 group-hover:text-indigo-600 dark:bg-slate-800 dark:text-slate-200 dark:group-hover:bg-indigo-500/15 dark:group-hover:text-indigo-300">
+                    {link.icon === "home" && (
+                      <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="currentColor">
+                        <path d="M11.3 3.3a1 1 0 0 1 1.4 0l8 7.5A1 1 0 0 1 20 12.5h-1V20a1 1 0 0 1-1 1h-4v-5h-4v5H6a1 1 0 0 1-1-1v-7.5H4a1 1 0 0 1-.7-1.7l8-7.5Z" />
+                      </svg>
+                    )}
+                    {link.icon === "eye" && (
+                      <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="currentColor">
+                        <path d="M12 5c5 0 8.6 3.6 10 7-1.4 3.4-5 7-10 7S3.4 15.4 2 12c1.4-3.4 5-7 10-7Zm0 3.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" />
+                      </svg>
+                    )}
+                    {link.icon === "chat" && (
+                      <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="currentColor">
+                        <path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Zm-4 8a1.2 1.2 0 1 1 0 2.4A1.2 1.2 0 0 1 8 11Zm4 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Zm4 0a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z" />
+                      </svg>
+                    )}
+                  </span>
+                  <span class="min-w-0 flex-1">
+                    <span class="block text-sm font-semibold text-slate-900 dark:text-white">
+                      {link.title}
+                    </span>
+                    <span class="block truncate text-sm text-slate-500 dark:text-slate-400">
+                      {link.description}
+                    </span>
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    class="size-4 shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-indigo-500"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                  {"external" in link && link.external && (
+                    <span class="sr-only">(se abre en una pestaña nueva)</span>
+                  )}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </section>
+</Layout>
