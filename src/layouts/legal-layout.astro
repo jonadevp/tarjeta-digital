@@ -1,0 +1,30 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SectionContainer from "@components/section-container.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  updated: Date;
+}
+
+const { title, description, updated } = Astro.props;
+
+// La fecha del frontmatter se interpreta en UTC; se muestra en UTC para que no se corra un día
+const updatedText = updated.toLocaleDateString("es-MX", {
+  dateStyle: "long",
+  timeZone: "UTC",
+});
+---
+
+<Layout title={`${title} | Jonadevp`} description={description}>
+  <SectionContainer class="max-w-3xl ">
+    <article class="prose prose-slate dark:prose-invert mx-auto max-w-2xl px-4 py-16 sm:py-24 prose-code:before:content-none prose-code:after:content-none">
+      <h1 class="text-2xl font-bold ">{title}</h1>
+      <p class="text-sm ">
+        Última actualización: <time datetime={updated.toISOString()}>{updatedText}</time>
+      </p>
+      <slot />
+    </article>
+  </SectionContainer>
+</Layout>

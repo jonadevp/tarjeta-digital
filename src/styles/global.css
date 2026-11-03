@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 @import "tailwind-animations";
+@plugin "@tailwindcss/typography";
 
 @theme inline {
   --font-sans: var(--font-inter);
