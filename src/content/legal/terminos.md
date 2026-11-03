@@ -31,7 +31,7 @@ El alcance, el precio y el plazo de cada proyecto se detallan en la cotización 
 El cliente declara tener los derechos sobre los textos, imágenes y marcas que entregue, y es responsable de su contenido.
 
 ## Proyectos no permitidos
-Jonathan puede rechazar o cancelar proyectos que busquen promover actividades ilícitas, fraudulentas o que infrinjan derechos de terceros. En ese caso se aplica la política de [cancelaciones y reembolsos](/legal/reembolsos).
+Jonathan puede rechazar o cancelar proyectos que busquen promover actividades ilícitas, fraudulentas o que infrinjan derechos de terceros. En ese caso se aplica la política de [cancelaciones y reembolsos](/legal/cancelaciones).
 
 ## Propiedad
 - Al pagar el saldo completo, el cliente tiene derecho a usar el sitio publicado, y el dominio y los contenidos que entregó son suyos.
@@ -57,7 +57,7 @@ Jonathan responde por la entrega del servicio acordado. No garantiza resultados 
 Si tienes una duda o inconformidad sobre un cobro o un servicio, escribe a contacto@jonadevp.com. Responderé en un plazo máximo de 5 días hábiles.
 
 ## Cancelaciones y reembolsos
-Consulta la política de [cancelaciones y reembolsos](/legal/reembolsos).
+Consulta la política de [cancelaciones y reembolsos](/legal/cancelaciones).
 
 ## Cambios a estos términos
 Estos términos pueden cambiar. Aplica la versión vigente al momento de aceptar la cotización.
