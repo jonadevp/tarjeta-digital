@@ -1,11 +1,11 @@
 ---
 title: Aviso de privacidad
 description: Cómo Jonadevp recoge y trata tus datos personales.
-updated: 2026-11-02
+updated: 2026-11-03
 ---
 
 ## Responsable
-Jonathan Sánchez Rodríguez es responsable del tratamiento de tus datos personales. Domicilio: ___. Contacto: contacto@jonadevp.com.
+Jonadevp, nombre comercial de Jonathan Sánchez Rodríguez, es responsable del tratamiento de tus datos personales. Domicilio: Fortín, Veracruz, México. Contacto: contacto@jonadevp.com.
 
 ## Qué datos recabamos
 - **Al escribirme por WhatsApp desde el formulario del sitio:** tu nombre, el tipo de proyecto y el mensaje que escribas.

@@ -1,7 +1,7 @@
 ---
 title: Cancelaciones y reembolsos
 description: Condiciones de cancelación y reembolso de los servicios de Jonadevp.
-updated: 2026-11-02
+updated: 2026-11-03
 ---
 
 ## Anticipo
@@ -11,8 +11,8 @@ Para iniciar un proyecto se paga un anticipo, que se descuenta del precio total.
 - **El inicio del proyecto:** guía, registro y configuración.
 
 ## Cuándo se reembolsa
-- **Si Jonathan no entrega el proyecto en el plazo acordado**, se reembolsa el anticipo, descontando el costo del dominio. No se cobra el saldo restante.
-- **Si el cliente cancela antes de que inicie el trabajo**, se reembolsa el anticipo, descontando el costo del dominio. El trabajo inicia cuando Jonathan comienza el diseño o registra el dominio.
+- **Si Jonadevp no entrega el proyecto en el plazo acordado**, se reembolsa el anticipo, descontando el costo del dominio. No se cobra el saldo restante.
+- **Si el cliente cancela antes de que inicie el trabajo**, se reembolsa el anticipo, descontando el costo del dominio. El trabajo inicia cuando Jonadevp comienza el diseño o registra el dominio.
 
 ## Cuándo no se reembolsa
 - Si el cliente cancela una vez iniciado el trabajo, el anticipo no se devuelve, porque cubre el trabajo ya realizado.
