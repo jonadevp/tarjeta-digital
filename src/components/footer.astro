@@ -1,25 +1,45 @@
 ---
+import { getCollection } from "astro:content";
 const year = new Date().getFullYear();
+
+const legalPages = (await getCollection("legal")).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title, "es"),
+);
 ---
 
 <footer
   class="py-8 text-center border-t border-slate-200 dark:border-slate-800"
 >
   <div class="container mx-auto flex flex-col items-center gap-y-3">
-    <ul
-      class="flex flex-wrap items-center justify-center gap-x-6 text-sm text-slate-600 dark:text-slate-400"
-    >
-      <li>
-        <a
-          href="mailto:contacto@jonadevp.com"
-          class="hover:text-indigo-500 transition-colors"
-        >
-        contacto@jonadevp.com
-        </a>
-      </li>
-    </ul>
+    <nav aria-label="Información legal">
+      <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+        {
+          legalPages.map((page) => (
+            <li>
+              <a
+                href={`/legal/${page.id}`}
+                class="text-slate-600 underline-offset-4 hover:text-slate-900 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:text-slate-400 dark:hover:text-white"
+              >
+                {page.data.title}
+              </a>
+            </li>
+          ))
+        }
+
+        <li>
+          <button
+            type="button"
+            data-cc="show-preferencesModal"
+            class="cursor-pointer text-slate-600 underline-offset-4 hover:text-slate-900 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:text-slate-400 dark:hover:text-white"
+          >
+            Preferencias de cookies
+          </button>
+        </li>
+      </ul>
+    </nav>
+
     <p class="text-slate-500 dark:text-slate-400 text-sm">
-      © {year} · Diseñado y desarrollado  por JonaDevp
+      © {year} · Diseñado y desarrollado por JonaDevp
     </p>
   </div>
 </footer>
